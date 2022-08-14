@@ -26,9 +26,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
     "technologies_used": {
       "type": "component",
       "repeatable": true,
@@ -38,6 +35,9 @@
       "type": "component",
       "repeatable": true,
       "component": "button.button"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
