@@ -33,6 +33,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "title": {
+      "type": "string"
     }
   }
 }
