@@ -8,7 +8,11 @@ const nodemailer = require("nodemailer");
 app.use(express.json());
 app.use(cors());
 
-app.post("/", cors(), async (req, res) => {
+app.get("/", (req, res) => {
+  res.send("is running");
+});
+
+app.post("/send_mail", cors(), async (req, res) => {
   // create reusable transporter object using the default SMTP transport
 
   const { name, email, message } = req.body;
