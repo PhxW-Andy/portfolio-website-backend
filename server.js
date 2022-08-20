@@ -4,6 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 
 const nodemailer = require("nodemailer");
+const { response } = require("express");
 
 app.use(express.json());
 app.use(cors());
@@ -12,10 +13,10 @@ app.get("/", (req, res) => {
   res.send("is running");
 });
 
-app.post("/send_mail", cors(), async (req, res) => {
+app.post("/", cors(), async (req, res) => {
   // create reusable transporter object using the default SMTP transport
 
-  const { name, email, message } = req.body;
+  const { name, email, message } = req.body.formData;
 
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -32,7 +33,7 @@ app.post("/send_mail", cors(), async (req, res) => {
   });
 
   // send mail with defined transport object
-  await transporter.sendMail({
+  const mailOptions = {
     from: process.env.EMAIL_USER,
     to: process.env.EMAIL_USER,
     subject: "Portfolio - Kontaktformular",
@@ -40,6 +41,16 @@ app.post("/send_mail", cors(), async (req, res) => {
     html: `<p>Name: ${name}<br>
            Email: ${email}</p>
            <p>Nahricht: ${message}</p>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.send("error");
+    } else {
+      console.log("Email sent:" + info.response);
+      res.send("succes");
+    }
   });
 });
 
