@@ -4,7 +4,6 @@ require("dotenv").config();
 const cors = require("cors");
 
 const nodemailer = require("nodemailer");
-const { response } = require("express");
 
 app.use(express.json());
 app.use(cors());
@@ -45,9 +44,11 @@ app.post("/", cors(), async (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.log(error);
+      res.header("Access-Control-Allow-Origin", "*");
       res.send("error", { message: error });
     } else {
       console.log("Email sent:" + info.response);
+      res.header("Access-Control-Allow-Origin", "*");
       res.send("success");
     }
   });
