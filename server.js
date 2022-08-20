@@ -45,7 +45,7 @@ app.post("/", cors(), async (req, res) => {
     if (error) {
       console.log(error);
       res.header("Access-Control-Allow-Origin", "*");
-      res.send("error", { message: error });
+      res.send("error" + error.message);
     } else {
       console.log("Email sent:" + info.response);
       res.header("Access-Control-Allow-Origin", "*");
