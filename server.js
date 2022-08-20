@@ -24,10 +24,10 @@ app.post("/", cors(), async (req, res) => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD,
     },
-    tls: {
-      // do not fail on invalid certs
-      rejectUnauthorized: false,
-    },
+    // tls: {
+    //   // do not fail on invalid certs
+    //   rejectUnauthorized: false,
+    // },
   });
 
   // send mail with defined transport object
