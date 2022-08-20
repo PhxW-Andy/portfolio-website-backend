@@ -15,8 +15,7 @@ app.get("/", (req, res) => {
 
 app.post("/", cors(), async (req, res) => {
   // create reusable transporter object using the default SMTP transport
-
-  const { name, email, message } = req.body.formData;
+  const { name, email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -49,7 +48,7 @@ app.post("/", cors(), async (req, res) => {
       res.send("error", { message: error });
     } else {
       console.log("Email sent:" + info.response);
-      res.send("succes");
+      res.send("success");
     }
   });
 });
